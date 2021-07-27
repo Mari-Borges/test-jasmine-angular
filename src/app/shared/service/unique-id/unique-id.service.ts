@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core";
 import { v4 as uuidv4 } from "uuid";
 
 @Injectable()
-export class UniqueIdService {
+export class UniqueServiceId {
 
     private numberOfGereneteIds = 0;
 
-    public generateUniqueIdWithPrefix(prefix: string): string {
+    public generateUniqueIdWithprefix(prefix: string): string {
         if(!prefix){
             throw Error('prefix can not be empty');
         }
