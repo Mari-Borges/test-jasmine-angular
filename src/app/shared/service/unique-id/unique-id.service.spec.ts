@@ -8,9 +8,12 @@ describe(UniqueServiceId.name, () =>{
     });
     it(`#${UniqueServiceId.prototype.generateUniqueIdWithprefix.name}should not generate duplicate IDs when called multiple times`, () =>{
         const service = new UniqueServiceId();
-        const firstId = service.generateUniqueIdWithprefix('app');
-        const secondId = service.generateUniqueIdWithprefix('app')
-        expect(firstId).not.toBe(secondId)
+        const ids = new Set();
+        for(let i = 0; i < 50; i++){
+            ids.add(service.generateUniqueIdWithprefix('app'));
+
+        }
+        expect(ids.size).toBe(50);
 
     });
 });
