@@ -1,19 +1,35 @@
 import { UniqueServiceId } from './unique-id.service';
+
+
 describe(UniqueServiceId.name, () =>{
+    let service: UniqueServiceId = null
+    beforeEach(()=> {
+        service = new UniqueServiceId();
+    })
     it(`#${UniqueServiceId.prototype.generateUniqueIdWithprefix.name}generate id when called with prefix`, () =>{
-        const service = new UniqueServiceId();
         const id = service.generateUniqueIdWithprefix('app');
         expect(id.startsWith('app-')).toBeTrue();
 
     });
     it(`#${UniqueServiceId.prototype.generateUniqueIdWithprefix.name}should not generate duplicate IDs when called multiple times`, () =>{
-        const service = new UniqueServiceId();
         const ids = new Set();
         for(let i = 0; i < 50; i++){
             ids.add(service.generateUniqueIdWithprefix('app'));
 
         }
         expect(ids.size).toBe(50);
+
+    });
+    it(`#${UniqueServiceId.prototype.getNumberOfGeneratedUniqueIds.name} should return the number of generatedIds when called`, () =>{
+        service.generateUniqueIdWithprefix('app');
+        service.generateUniqueIdWithprefix('app');
+        expect(service.getNumberOfGeneratedUniqueIds()).toBe(2)
+
+    })
+    it(`#${UniqueServiceId.prototype.generateUniqueIdWithprefix.name} should throw when called with empty`, ()=> {
+        expect(() => service.generateUniqueIdWithprefix(null)).toThrow();
+        expect(() => service.generateUniqueIdWithprefix(undefined)).toThrow();
+        expect(() => service.generateUniqueIdWithprefix('')).toThrow();
 
     });
 });
