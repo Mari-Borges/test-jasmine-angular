@@ -27,9 +27,10 @@ describe(UniqueServiceId.name, () =>{
 
     })
     it(`#${UniqueServiceId.prototype.generateUniqueIdWithprefix.name} should throw when called with empty`, ()=> {
-       const emptyValues = [null, undefined, '', '0']
+       const emptyValues = [null, undefined, '', '0', 'app']
        emptyValues.forEach(emptyValues => {
-           expect (() => service.generateUniqueIdWithprefix(emptyValues)).toThrow();
+           expect (() => service.generateUniqueIdWithprefix(emptyValues))
+           .withContext(`Emoty value: ${emptyValues}`).toThrow();
        });
 
     });
