@@ -6,4 +6,11 @@ describe(UniqueServiceId.name, () =>{
         expect(id.startsWith('app-')).toBeTrue();
 
     });
+    it(`#${UniqueServiceId.prototype.generateUniqueIdWithprefix.name}should not generate duplicate IDs when called multiple times`, () =>{
+        const service = new UniqueServiceId();
+        const firstId = service.generateUniqueIdWithprefix('app');
+        const secondId = service.generateUniqueIdWithprefix('app')
+        expect(firstId).not.toBe(secondId)
+
+    });
 });
