@@ -34,13 +34,12 @@ describe(LikeWidgetComponent.name, ()=>{
         expect(component.id).toBe(someId);
 
     });
-    it(`#${LikeWidgetComponent.prototype.like.name} should trigger emission when called`, dane => {
+    it(`#${LikeWidgetComponent.prototype.like.name} should trigger emission when called`, () => {
+        spyOn(component.liked, 'emit');
         fixture.detectChanges();
-        component.liked.subscribe(()=>{
-            expect(true).toBeTrue();
-            dane();
-        });
         component.like();
+        expect(component.liked.emit).toHaveBeenCalled();
+        
 
     });
 });
