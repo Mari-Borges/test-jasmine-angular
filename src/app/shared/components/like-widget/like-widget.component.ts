@@ -1,21 +1,21 @@
 import { UniqueServiceId } from './../../service/unique-id/unique-id.service';
 import { Component, Input, OnInit, Output } from "@angular/core";
-import { EventEmitter } from "events";
+import { EventEmitter } from '@angular/core';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-like-widget',
-    template: './like-widget.component.html',
+    templateUrl: './like-widget.component.html',
     styleUrls: ['./like-widget.component.scss']
 })
 
 export class LikeWidgetComponent implements OnInit{
-    @Output() public liked = new EventEmitter();
+    @Output() public liked = new EventEmitter<void>();
     @Input() public likes = 0;
-    @Input() public id = null;
+    @Input() public id: string = null;
 
 
-    public fonts = {faThumbsUp}
+    public fonts = { faThumbsUp };
 
     constructor(private Service: UniqueServiceId) {}
 
@@ -25,8 +25,8 @@ export class LikeWidgetComponent implements OnInit{
         }
     }
 
-    like(): void {
-        this.liked.emit;
+    public like(): void {
+        this.liked.emit();
 
     }
 
